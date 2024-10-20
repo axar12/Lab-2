@@ -3,24 +3,34 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                // Use 'checkout scm' to get the code from the repository
                 checkout scm
             }
         }
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                // Use 'bat' instead of 'sh' for Windows
+                bat 'mvn clean install'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying application...'
-                // You can add your deployment steps here
+                // Add actual deployment steps here if needed
             }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
