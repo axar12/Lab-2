@@ -1,15 +1,16 @@
 pipeline {
     agent any
+    tools {
+        maven 'Maven' // Specify the Maven tool configured in Jenkins
+    }
     stages {
         stage('Checkout') {
             steps {
-                // Use 'checkout scm' to get the code from the repository
                 checkout scm
             }
         }
         stage('Build') {
             steps {
-                // Use 'bat' instead of 'sh' for Windows
                 bat 'mvn clean install'
             }
         }
@@ -21,7 +22,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying application...'
-                // Add actual deployment steps here if needed
             }
         }
     }
